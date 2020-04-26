@@ -35,8 +35,8 @@ export default {
     data(){
         return {
             form:{
-                username: '',
-                password: ''
+                username: 'zhangkun',
+                password: 'zk@123456'
             },
             loading: false,
             rules:{
@@ -51,9 +51,9 @@ export default {
     },
     methods:{
         submit(){
-            this.loading = true;
             this.$refs.form.validate(async (val)=>{
                 if(val){
+                    this.loading = true;
                     const res = await Login(this.form);
                     this.loading = false;
                     if(res.success){
