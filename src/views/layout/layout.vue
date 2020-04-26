@@ -8,7 +8,7 @@
                     </div>
                     <el-dropdown trigger="click">
                         <span class="el-dropdown-link">
-                            {{ '欢迎！' + user.nickName }}<i class="el-icon-arrow-down el-icon--right"></i>
+                            {{ '欢迎！' + (user ? user.nickName : '有点问题') }}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
