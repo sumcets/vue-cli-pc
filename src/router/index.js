@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import TopLeftContent from './topLeftContent'
+import storege from '@/storege'; 
+
 
 const Layout = () => import('@/views/layout/layout')
 const Login = () => import('@/views/site/login')
 
-import TopLeftContent from './topLeftContent'
 
 Vue.use(VueRouter);
 
@@ -35,8 +37,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next)=>{
-    const token = localStorage.getItem('accessToken');
-    if(to.meta.needLogin && !token){
+    const token = storege.getItem('accessToken');
+    if(to.meta.needAuth && !token){
         router.replace('/site/login')
     }
     next();
