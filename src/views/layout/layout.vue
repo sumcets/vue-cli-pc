@@ -3,12 +3,14 @@
         <el-container>
             <el-header>
                 <div class="header">
-                    <div class="img">
+                    <div class="img" :class=" isOpen? 'ano-close' : 'ano-open' ">
+                        <i class="el-icon-s-unfold open" @click="isOpen = false;" v-show="isOpen"></i>
+                        <i class="el-icon-s-fold close" @click="isOpen = true" v-show="!isOpen"></i>
                         <el-avatar size="large" :src="user.avatarUrl"></el-avatar>
                     </div>
                     <el-dropdown trigger="click">
                         <span class="el-dropdown-link">
-                            {{ '欢迎！' + (user ? user.nickName : '有点问题') }}<i class="el-icon-arrow-down el-icon--right"></i>
+                            {{ '欢迎！' + ( user ? user.nickName : '有点问题') }}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
@@ -19,9 +21,9 @@
                 </div>
             </el-header>
             <el-container>
-                <el-aside width="200px">
-                    <div class="left">
-                        <el-menu default-active="/" class="el-menu-vertical-demo" :router="true">
+                <el-aside :width=" !isOpen ? '300px':'60px'">
+                    <div class="left" :class="isOpen? 'ano-close' : 'ano-open'">
+                        <el-menu default-active="/" class="el-menu-vertical-demo" :router="true" :collapse="isOpen" :collapse-transition="false">
                             <el-submenu index="1">
                                 <template slot="title">
                                     <i class="el-icon-location"></i>
@@ -63,7 +65,7 @@ import { mapState } from 'vuex'
 export default {
     data(){
         return {
-
+            isOpen:false
         }
     },
     methods:{
@@ -95,10 +97,32 @@ export default {
     }
     .header .img{
         height: 100%;
-        width: 150px;
+        width: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
+        font-size: 25px;
+        font-weight: 100;
+    }
+    .header .img .open{
+        position: absolute;
+        right: -45px;
+        color: rgba(0,0,0,.2);
+        cursor: pointer;
+    }
+    .header .img .close{
+        position: absolute;
+        right: 0;
+        color: rgba(0,0,0,.2);
+        cursor: pointer;
+    }
+    .ano-close{
+        transition: all .3s ease-out;
+        width: 60px!important;
+    }
+    .ano-open{
+        transition: all .3s ease-out;
     }
     .left{
         height: 100%;

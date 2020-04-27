@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import store from '@/store/store'; 
 import router from '../router/index';
-const baseURL = 'http://192.168.5.47:8083/' 
+const baseURL = 'http://192.168.0.102:8083/' 
 
 /**
  * 
@@ -25,18 +25,22 @@ export default function Ajax({url, data={}, params={}, method='get'}){
     ajax.interceptors.response.use(response => {
         return Promise.resolve(response) 
     }, error => {
-        if(error.response.status === 401){
+        //这个errro对象很难驾驭的住啊
+        if(error && error.response && error.response.status === 401){
             router.replace('/site/login')
             return;
         }
-        return Promise.reject(error.response) 
+        return Promise.reject({
+            success: false,
+            msg:'出错了～'
+        }) 
     });
 
     return new Promise((resolve)=>{
         ajax({url, data, params}).then((res)=>{
             resolve(res.data)
         }).catch((res)=>{
-            resolve(res.data)
+            resolve(res)
         })
     });
 } 

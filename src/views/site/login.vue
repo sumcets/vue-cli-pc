@@ -1,5 +1,8 @@
 <template>
   <div class="login">
+      <div class="name">
+              <!-- 全新一代树莓派智能管理系统 -->
+      </div>
       <div class="raw">
           <div class="title">
               登录
@@ -65,7 +68,7 @@ export default {
                         return
                     }
                     this.$message({
-                        message:'用户名或密码错误',
+                        message:res.msg || '未知错误',
                         type:'error',
                         duration: 1500
                     });
@@ -84,6 +87,19 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        background: url(http://7n.sumcet.com/pi/pi-ac.png) no-repeat;
+        background-size: 200px 200px;
+        background-position: center 150px;
+        position: relative;
+    }
+    .name{
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        font-size: 30px;
+        font-weight: 500;
+        height: auto;
+        width: auto;
     }
     .raw{
         height: auto;
